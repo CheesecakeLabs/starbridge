@@ -20,11 +20,16 @@ import styles from './styles.module.scss'
 export interface IHomeTemplateProps {
   transactionTitle?: string
   handleSubmit: (evt: FormEvent<HTMLFormElement>) => Promise<void>
+  onSendingButtonClick?: () => void
+  onReceivingButtonClick?: () => void
 }
 
-const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
+const HomeTemplate = ({
+  handleSubmit,
+  onSendingButtonClick,
+  onReceivingButtonClick,
+}: IHomeTemplateProps): JSX.Element => {
   const [isButtonEnabled, setIsButtonEnabled] = useState(false)
-  const [toggleSwitchTitle, setToggleSwitchTitle] = useState(true)
   const [inputSent, setInputSent] = useState('')
   const [currencyFrom, setCurrencyFrom] = useState(Currency.ETH)
   const [currencyTo, setCurrencyTo] = useState(Currency.WETH)
@@ -70,7 +75,7 @@ const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
           <Typography
             className={styles.title}
             variant={TypographyVariant.h3}
-            text={toggleSwitchTitle && `${currencyFrom} -> ${currencyTo}`}
+            text={`${currencyFrom} -> ${currencyTo}`}
           />
           <Button
             className={styles.button}
@@ -90,6 +95,7 @@ const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
                 currency={currencyPropsConverter[currencyFrom]}
                 onChange={onInputSentChange}
                 name={InputLabel.sending}
+                onClick={onSendingButtonClick}
               />
             </div>
             <div className={styles.formRow}>
@@ -98,6 +104,7 @@ const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
                 name={InputLabel.receive}
                 disabled
                 placeholder={receiveValue ? receiveValue : '--'}
+                onClick={onReceivingButtonClick}
               />
             </div>
             <Button
