@@ -19,6 +19,8 @@ export const WalletInput = ({
   isSender,
   currency,
   onChange,
+  name,
+  placeholder,
 }: IWalletInputProps): JSX.Element => {
   return (
     <div className={styles.inputContainer}>
@@ -33,10 +35,13 @@ export const WalletInput = ({
         </Button>
       </div>
       <LabeledInput
-        name={currency.initials}
+        name={name}
         label={isSender ? InputLabel.sending : InputLabel.receive}
         currency={currency}
         onChange={onChange}
+        isSender={isSender}
+        disabled={name === InputLabel.receive}
+        placeholder={placeholder ?? '--'}
       />
     </div>
   )

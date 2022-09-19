@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useRef, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 
 import {
   Button,
@@ -7,7 +7,7 @@ import {
   Typography,
   TypographyVariant,
 } from 'components/atoms'
-import { ICurrencyProps } from 'components/molecules'
+import { ICurrencyProps, InputLabel } from 'components/molecules'
 import { WalletInput } from 'components/organisms/wallet-input'
 import { Currency, CurrencyLabel } from 'components/types/currency'
 
@@ -24,13 +24,11 @@ export interface IHomeTemplateProps {
 
 const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
   const [isButtonEnabled, setIsButtonEnabled] = useState(false)
-  const sendingRef = useRef<HTMLInputElement>(null)
-  const receivingRef = useRef<HTMLInputElement>(null)
   const [toggleSwitchTitle, setToggleSwitchTitle] = useState(true)
   const [inputSent, setInputSent] = useState('')
-  const [inputReceived, setInputReceived] = useState('')
   const [currencyFrom, setCurrencyFrom] = useState(Currency.ETH)
   const [currencyTo, setCurrencyTo] = useState(Currency.WETH)
+  const [receiveValue, setReceiveValue] = useState('')
 
   const currencyPropsConverter: Record<Currency, ICurrencyProps> = {
     [Currency.WETH]: {
@@ -45,22 +43,16 @@ const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
     },
   }
 
-  const onInputReceivedChange = (
-    evt: React.FormEvent<HTMLInputElement>
-  ): void => {
-    const input = evt.target as HTMLInputElement
-    setInputReceived(input.value)
-  }
-
   const onInputSentChange = (evt: React.FormEvent<HTMLInputElement>): void => {
     const input = evt.target as HTMLInputElement
 
     setInputSent(input.value)
+    setReceiveValue(input.value)
   }
 
   useEffect(() => {
-    setIsButtonEnabled(inputSent > '0' && inputReceived > '0')
-  }, [inputSent, inputReceived])
+    setIsButtonEnabled(inputSent > '0')
+  }, [inputSent])
 
   const changeCurrency = (): void => {
     setCurrencyFrom(prev =>
@@ -97,16 +89,15 @@ const HomeTemplate = ({ handleSubmit }: IHomeTemplateProps): JSX.Element => {
                 isSender
                 currency={currencyPropsConverter[currencyFrom]}
                 onChange={onInputSentChange}
-                name={'sending'}
-                ref={sendingRef}
+                name={InputLabel.sending}
               />
             </div>
             <div className={styles.formRow}>
               <WalletInput
                 currency={currencyPropsConverter[currencyTo]}
-                onChange={onInputReceivedChange}
-                name={'receiving'}
-                ref={receivingRef}
+                name={InputLabel.receive}
+                disabled
+                placeholder={receiveValue ? receiveValue : '--'}
               />
             </div>
             <Button
