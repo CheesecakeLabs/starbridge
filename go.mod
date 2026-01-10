@@ -31,7 +31,6 @@ require (
 	github.com/gorilla/websocket v1.4.2 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jmoiron/sqlx v1.2.0 // indirect
-	github.com/konsorten/go-windows-terminal-sequences v1.0.3 // indirect
 	github.com/kr/pretty v0.1.0 // indirect
 	github.com/kr/text v0.1.0 // indirect
 	github.com/lann/builder v0.0.0-20180802200727-47ae307949d0 // indirect
@@ -44,7 +43,7 @@ require (
 	github.com/rjeczalik/notify v0.9.1 // indirect
 	github.com/segmentio/go-loggly v0.5.1-0.20171222203950-eb91657e62b2 // indirect
 	github.com/shirou/gopsutil v3.21.4-0.20210419000835-c7a38de76ee5+incompatible // indirect
-	github.com/sirupsen/logrus v1.6.0 // indirect
+	github.com/sirupsen/logrus v1.8.3 // indirect
 	github.com/spf13/cast v0.0.0-20150508191742-4d07383ffe94 // indirect
 	github.com/spf13/jwalterweatherman v0.0.0-20141219030609-3d60171a6431 // indirect
 	github.com/spf13/pflag v0.0.0-20161005214240-4bd69631f475 // indirect
@@ -70,6 +69,6 @@ require (
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/stellar/go v0.0.0-20220624135614-77a1f25e415a
-	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9 // indirect
+	golang.org/x/sys v0.0.0-20220715151400-c0bba94af5f8 // indirect
 	google.golang.org/protobuf v1.26.0 // indirect
 )
